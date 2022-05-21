@@ -1,0 +1,22 @@
+from unittest.mock import Mock
+
+def greeter(name: str, display_callable: callable = print):
+    ''' Demo function used to demonstrate how to use a mock in place of another object.'''
+    display_callable(f'Hello, {name}')
+
+# This will display Hello, World in the console because the built-in print
+# function is the default argument for the display_callable parameter.
+greeter('World')
+# Call again passing a mock as the display_callable.
+display = Mock()
+# This will not display in the console because the mock is called in 
+# place of the print function.
+greeter('World', display)
+# Mocks include different assertion methods used to determine if the 
+# mock implementation is called as expected.
+# Verify that the mock implementation of print is called with the expected
+# argument value.
+display.assert_called_with('Hello, World')
+
+###############################################################################
+print('No assertion errors')
